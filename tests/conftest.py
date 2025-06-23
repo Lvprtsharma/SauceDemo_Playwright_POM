@@ -1,12 +1,9 @@
-import os
-import sys
 import pytest
 from playwright.sync_api import Page, sync_playwright
 
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, project_root)
-
 from pages.login_page import LoginPage
+from pages.inventory_page import InventoryPage
+from utils.test_data import TestData
 
 
 @pytest.fixture(scope="session")
@@ -52,3 +49,17 @@ def login_page(page: Page):
     This ensures that the page is ready for testing.
     """
     return LoginPage(page)
+
+
+@pytest.fixture
+def inventory_page(page: Page):
+    """Inventory page fixture"""
+    return InventoryPage(page)
+
+
+@pytest.fixture
+def authenticated_user(login_page):
+    """Fixture to login with standard user"""
+    login_page.navigate()
+    login_page.login(TestData.STANDARD_USER, TestData.VALID_PASSWORD)
+    return login_page

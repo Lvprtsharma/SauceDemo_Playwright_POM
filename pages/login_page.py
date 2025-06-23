@@ -73,3 +73,11 @@ class LoginPage(BasePage):
         Verify that the login logo is visible on the login page.
         """
         return self.is_element_visible(self.LOGIN_LOGO)
+
+    def verify_login_page_loaded(self):
+        """
+        Verify login page is loaded
+        """
+        expect(self.page.locator(self.LOGIN_LOGO)).to_be_visible()
+        expect(self.page.locator(self.USERNAME_INPUT)).to_be_visible()
+        expect(self.page.locator(self.PASSWORD_INPUT)).to_be_visible()

@@ -8,3 +8,4 @@ __init__.py
 pages/__pycache__
 tests/__pycache__
 utils/__pycache__
+.env
